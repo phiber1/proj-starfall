@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>StarFall</title>
+<!-- The one-pager: "make docs" renders it to docs/starfall.pdf (US Letter)
+     with headless Chromium; the pictures come from tools/shots.sh and
+     tools/docimg.py. -->
+<style>
+  @page { size: 8.5in 11in; margin: 0; }
+  :root {
+    --space: #101010; --blue: #3078d8; --orange: #d88850; --white: #f0f0f0;
+    --ink: #1c2230; --soft: #5a6478; --paper: #fbfaf7; --tint: #eef3fb; --warm: #fbf0e6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 8.5in; height: 11in; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font: 9.3pt/1.36 "Noto Sans", "DejaVu Sans", sans-serif;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    display: flex; flex-direction: column;
+  }
+  /* the header: the title screen's logo on a field of stars */
+  header {
+    position: relative; background: var(--space); color: var(--white);
+    padding: 0.24in 0.5in 0.2in; overflow: hidden; flex-shrink: 0;
+  }
+  header::before {
+    content: ""; position: absolute; inset: 0; opacity: 0.9;
+    background-image:
+      radial-gradient(1.4px 1.4px at 6% 22%, #fff 99%, transparent),
+      radial-gradient(1.4px 1.4px at 14% 78%, var(--orange) 99%, transparent),
+      radial-gradient(1.4px 1.4px at 35% 6%, var(--blue) 99%, transparent),
+      radial-gradient(1.4px 1.4px at 47% 88%, #fff 99%, transparent),
+      radial-gradient(1.4px 1.4px at 58% 18%, var(--orange) 99%, transparent),
+      radial-gradient(1.4px 1.4px at 66% 62%, #fff 99%, transparent),
+      radial-gradient(1.4px 1.4px at 74% 30%, var(--blue) 99%, transparent),
+      radial-gradient(1.4px 1.4px at 83% 84%, #fff 99%, transparent),
+      radial-gradient(1.4px 1.4px at 91% 14%, #fff 99%, transparent),
+      radial-gradient(1.4px 1.4px at 96% 56%, var(--orange) 99%, transparent),
+      radial-gradient(1.4px 1.4px at 39% 50%, #fff 99%, transparent),
+      radial-gradient(1.4px 1.4px at 22% 40%, var(--blue) 99%, transparent);
+  }
+  header > * { position: relative; }
+  .top { display: flex; align-items: center; gap: 0.32in; }
+  .logo { width: 3.9in; image-rendering: pixelated; display: block; }
+  .tag { flex: 1; }
+  .tag .kicker { color: var(--orange); font-weight: 700; letter-spacing: 0.14em; font-size: 8pt; text-transform: uppercase; }
+  .tag h1 { font: 800 15pt/1.2 "Noto Sans Display", "Noto Sans", sans-serif; margin: 3px 0 4px; }
+  .tag p { color: #c8ccd6; font-size: 9pt; }
+  .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.14in; margin-top: 0.18in; }
+  figure img { width: 100%; display: block; image-rendering: pixelated; border-radius: 4px; border: 1px solid #333; }
+  figcaption { font-size: 7.4pt; color: #aab0bc; margin-top: 3px; text-align: center; }
+
+  main { flex: 1; min-height: 0; overflow: hidden; display: grid; grid-template-columns: 1.08fr 1fr; gap: 0.26in; padding: 0.2in 0.5in 0.12in; }
+  h2 {
+    font: 800 11.5pt/1.2 "Noto Sans Display", "Noto Sans", sans-serif; letter-spacing: 0.03em;
+    color: var(--blue); text-transform: uppercase; margin: 0 0 5px;
+    display: flex; align-items: center; gap: 7px;
+  }
+  h2::before { content: ""; width: 9px; height: 9px; background: var(--orange); border-radius: 2px; }
+  h2.o { color: var(--orange); }
+  h2.o::before { background: var(--blue); }
+  section { margin-bottom: 0.14in; }
+  p + p { margin-top: 4px; }
+  ul { list-style: none; }
+  li { padding-left: 13px; position: relative; margin: 2px 0; }
+  li::before { content: ""; position: absolute; left: 1px; top: 0.55em; width: 5px; height: 5px; background: var(--blue); border-radius: 50%; }
+  b { color: #0f1626; }
+  .keys { display: grid; grid-template-columns: auto 1fr; gap: 3px 10px; align-items: center; }
+  kbd {
+    font: 700 8pt "DejaVu Sans Mono", monospace; background: var(--space); color: var(--white);
+    border-radius: 3px; padding: 1px 6px; border-bottom: 2px solid var(--blue); white-space: nowrap;
+  }
+  .cast { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 6px 0 2px; }
+  .cast div { background: var(--space); border-radius: 6px; padding: 6px 4px 5px; text-align: center; color: var(--white); font: 700 7.6pt "DejaVu Sans Mono", monospace; letter-spacing: 0.05em; }
+  .cast img { width: 48px; image-rendering: pixelated; display: block; margin: 0 auto 2px; }
+  .bosses { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 7px; }
+  .bosses figure img { border-color: #c9d3e3; }
+  .bosses figcaption { color: var(--soft); }
+  .box { background: var(--tint); border-left: 4px solid var(--blue); border-radius: 0 6px 6px 0; padding: 8px 10px; }
+  .box.warm { background: var(--warm); border-left-color: var(--orange); }
+  .box + .box { margin-top: 8px; }
+  code { font: 8.2pt "DejaVu Sans Mono", monospace; background: #fff; border: 1px solid #d5dbe6; border-radius: 3px; padding: 0 3px; }
+  footer {
+    background: var(--space); color: #aab0bc; font-size: 7.8pt;
+    padding: 0.13in 0.5in; display: flex; flex-shrink: 0; justify-content: space-between; align-items: center;
+  }
+  footer .by { color: var(--orange); font-weight: 800; letter-spacing: 0.16em; }
+  footer .url { color: var(--white); font-family: "DejaVu Sans Mono", monospace; }
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <img class="logo" src="img/logo.png" alt="StarFall">
+    <div class="tag">
+      <div class="kicker">A space shooter for the TRS-80 MC-10</div>
+      <h1>Four areas. Four bosses. One Space Fortress.</h1>
+      <p>Alien waves sweep down in formation, all in NTSC artifact colour.</p>
+    </div>
+  </div>
+  <div class="strip">
+    <figure><img src="img/title.png" alt=""><figcaption>The title: meet the Blorps</figcaption></figure>
+    <figure><img src="img/play.png" alt=""><figcaption>A wave of Swoopers</figcaption></figure>
+    <figure><img src="img/map.png" alt=""><figcaption>The map between areas</figcaption></figure>
+    <figure><img src="img/finale.png" alt=""><figcaption>Victory, for now</figcaption></figure>
+  </div>
+</header>
+
+<main>
+  <div>
+    <section>
+      <h2>The story</h2>
+      <p>The alien <b>Blorps</b> are on the march. Fly up through four areas of space and break wave after wave
+        of their fighters. Each area ends with a boss, and the last of them is the <b>Space Fortress</b>. Bring it down
+        and the galaxy is safe&hellip; until the Blorps come back, faster and fiercer, in the next round.</p>
+    </section>
+
+    <section>
+      <h2>Controls</h2>
+      <div class="keys">
+        <span><kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>&uarr;</kbd> <kbd>&darr;</kbd> or <kbd>A</kbd> <kbd>S</kbd> <kbd>W</kbd> <kbd>Z</kbd></span><span>move your ship</span>
+        <span><kbd>SPACE</kbd></span><span>fire</span>
+      </div>
+      <p style="margin-top:5px">A PI-KEY10 joystick plugged in as joystick 1 works too.</p>
+    </section>
+
+    <section>
+      <h2>Meet the Blorps</h2>
+      <div class="cast">
+        <div><img src="img/cast1.png" alt="">SWOOPER</div>
+        <div><img src="img/cast2.png" alt="">ZAGGER</div>
+        <div><img src="img/cast3.png" alt="">WARPER</div>
+      </div>
+      <p>Each alien you shoot scores <b>10 &times; the round</b>. Swoopers, Zaggers and Warpers dive, weave and
+        wrap around the screen, dropping bombs as they go.</p>
+    </section>
+
+    <section>
+      <h2 class="o">Scoring and bonuses</h2>
+      <ul>
+        <li><b>Sortie bonus:</b> wipe out a whole wave before any of it escapes, with no more than 3 seconds
+          between kills and no other kind of alien shot down in between. That earns <b>10&times;</b> an alien's value and a
+          <i>ba-BING!</i></li>
+        <li><b>Extra ships</b> at 10,000 and 25,000 points, then every 25,000 after that.</li>
+        <li><b>SHIPS</b> on the status bar counts the ships you have in reserve.</li>
+        <li>Beat the fortress for <b>10,000 per ship</b> left in reserve.</li>
+        <li>Your best score is saved on the SD card (<code>STARFALL.HI</code>).</li>
+      </ul>
+    </section>
+    <section>
+      <h2 class="o">Rounds</h2>
+      <p>After the fortress falls, the next round begins. Bombs fly faster and the aliens fire more often.
+        On even rounds the Blorps change colour too.</p>
+    </section>
+  </div>
+
+  <div>
+    <section>
+      <h2>The bosses</h2>
+      <p>Each boss shows its weak spot: <b>hit the core</b>. From area 2 on, envoys guard the boss, and its core stays
+        shut until they are destroyed. The fortress has <b>three cores</b>, and they open one after another.</p>
+      <div class="bosses">
+        <figure><img src="img/boss1.png" alt=""><figcaption>Area 1</figcaption></figure>
+        <figure><img src="img/boss2.png" alt=""><figcaption>Area 2</figcaption></figure>
+        <figure><img src="img/boss3.png" alt=""><figcaption>Area 3</figcaption></figure>
+        <figure><img src="img/boss4.png" alt=""><figcaption>Area 4: the Space Fortress</figcaption></figure>
+      </div>
+    </section>
+
+
+    <section>
+      <h2>What you need</h2>
+      <div class="box">
+        <ul>
+          <li>A <b>TRS-80 MC-10</b> with the <b>8K internal RAM mod</b></li>
+          <li>An <b>MCX32-SD</b> card interface</li>
+          <li>A TV or monitor that shows <b>NTSC artifact colour</b>. Press <kbd>C</kbd> on the colour check
+            screen if the colours are swapped.</li>
+          <li><i>Or</i> the <b>VMC10 for Linux</b> emulator, run with <code>--8k --mcx32sd</code></li>
+        </ul>
+      </div>
+      <div class="box warm">
+        <b>Loading:</b> copy <code>STARFALL.BIN</code> and <code>SFBOSS1.BIN</code>&ndash;<code>SFBOSS4.BIN</code>
+        to the SD card, then type<br><code>LOADM"STARFALL"</code> and <code>EXEC</code>.
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <span class="by">AN ABENE GAME</span>
+  <span>Built on mc10-game-engine &middot; Public domain (Unlicense)</span>
+  <span class="url">github.com/phiber1/proj-starfall</span>
+</footer>
+</body>
+</html>

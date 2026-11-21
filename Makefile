@@ -11,6 +11,8 @@
 #   make run-view        a still display of a sprite file's sprites
 #                        (VIEW=sprites/NAME.spr, default sprites/starfall.spr)
 #   make DEBUG=0         release build: no debug-port writes, no LOAD timing
+#   make docs            docs/starfall.pdf, the one-pager (headless Chromium;
+#                        docs-img first retakes its screenshots, emulator)
 #
 # On the SD card the game is STARFALL.BIN (LOADM"STARFALL"), with its boss
 # overlays SFBOSS1-4.BIN; it keeps its high score in STARFALL.HI there.
@@ -113,8 +115,18 @@ sdrun:
 check: build/starfall.bin $(OVL_BINS)
 	VMC10=$(VMC10) sh tests/check.sh
 
+# The one-pager: docs/onepager.html -> docs/starfall.pdf.  Its pictures
+# (docs/img, kept in the repository) come from the headless emulator.
+CHROME  ?= chromium
+docs: docs/starfall.pdf
+docs/starfall.pdf: docs/onepager.html $(wildcard docs/img/*.png)
+	$(CHROME) --headless --disable-gpu --no-pdf-header-footer --print-to-pdf=$@ $<
+docs-img: build/starfall.bin $(OVL_BINS)
+	sh tools/shots.sh build/shots
+	python3 tools/docimg.py build/shots
+
 clean:
 	rm -rf build
 
-.PHONY: all clean check overlays run run-game run-gamek sdrun FORCE
+.PHONY: all clean check docs docs-img overlays run run-game run-gamek sdrun FORCE
 .PRECIOUS: build/%.s build/%.p build/%_spr.inc build/%_equ.inc build/%.bin

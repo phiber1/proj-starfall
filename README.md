@@ -27,7 +27,9 @@ PI-KEY10's joystick 1 works as it is.
     make DEBUG=0    # release build
 
 Needs `asl` (the Macroassembler AS), a C compiler, cpp and Python 3.
-Also: `make run-sfx` (the sound board), `make run-logos` (logo colour
+`docs/starfall.pdf` is a one-pager on the game (`make docs` renders it
+from `docs/onepager.html` with headless Chromium; `make docs-img` retakes
+its screenshots).  Also: `make run-sfx` (the sound board), `make run-logos` (logo colour
 schemes), `make run-view VIEW=sprites/NAME.spr` (a sprite file's sprites).
 See `NOTES.md` for the design history.
 
