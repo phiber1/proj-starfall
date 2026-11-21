@@ -13,7 +13,7 @@ high score kept on the SD card.  Built on
 ## Playing
 
 Copy `STARFALL.BIN` and `SFBOSS1.BIN` .. `SFBOSS4.BIN` to the SD card and
-type `LOADM"STARFALL"` then `EXEC`.  The game keeps its high score in
+type `RUNM"STARFALL"`.  The game keeps its high score in
 `STARFALL.HI` on the card.  Arrows (W A S Z) move, SPACE fires; a
 PI-KEY10's joystick 1 works as it is.
 
