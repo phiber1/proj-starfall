@@ -5,6 +5,7 @@
 #   make                 build the game, its boss overlays and the tools
 #   make run             run the game in the emulator (also: make run-game;
 #                        run-gamek: with the CPU meter)
+#   make run-release     run release/ (the release build: make release)
 #   make check           headless checks (needs the VMC10 for Linux emulator)
 #   make run-sfx         the sound board: every game sound, up/down, SPACE
 #   make run-logos       the title logo in several color schemes
@@ -105,6 +106,10 @@ run run-game: build/starfall.bin $(OVL_BINS)
 	$(MAKE) --no-print-directory sdrun PROG=starfall NAME=STARFALL
 run-gamek: build/starfallk.bin $(OVL_BINS)
 	$(MAKE) --no-print-directory sdrun PROG=starfallk NAME=STARFALL
+run-release: release/STARFALL.BIN
+	mkdir -p $(SD)
+	cp release/STARFALL.BIN release/SFBOSS*.BIN $(SD)/
+	$(EMU) --mcx32sd --8k --sd $(SD) --type 'RUNM"STARFALL"\n'
 run-%: build/%.bin
 	$(MAKE) --no-print-directory sdrun PROG=$* NAME=$(shell echo $* | tr a-z A-Z)
 sdrun:
@@ -143,5 +148,5 @@ release: docs/starfall.pdf
 clean:
 	rm -rf build
 
-.PHONY: all clean check docs docs-img overlays release run run-game run-gamek sdrun FORCE
+.PHONY: all clean check docs docs-img overlays release run-release run run-game run-gamek sdrun FORCE
 .PRECIOUS: build/%.s build/%.p build/%_spr.inc build/%_equ.inc build/%.bin
