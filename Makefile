@@ -11,6 +11,8 @@
 #   make run-view        a still display of a sprite file's sprites
 #                        (VIEW=sprites/NAME.spr, default sprites/starfall.spr)
 #   make DEBUG=0         release build: no debug-port writes, no LOAD timing
+#   make release         release/: the release build (DEBUG=0) of
+#                        STARFALL.BIN and SFBOSS1-4.BIN, and the one-pager
 #   make docs            docs/starfall.pdf, the one-pager (headless Chromium;
 #                        docs-img first retakes its screenshots, emulator)
 #
@@ -125,8 +127,21 @@ docs-img: build/starfall.bin $(OVL_BINS)
 	sh tools/shots.sh build/shots
 	python3 tools/docimg.py build/shots
 
+# The release: a DEBUG=0 build of the game and its overlays, with the
+# one-pager, in release/ (kept in the repository).  Everything is rebuilt
+# (-B) for it, then rebuilt again as the usual debug build that make check
+# and make run use (build/sd and its high score file are left alone).
+release: docs/starfall.pdf
+	$(MAKE) --no-print-directory -B DEBUG=0 build/starfall.bin overlays
+	mkdir -p release
+	cp build/starfall.bin release/STARFALL.BIN
+	for n in $(BOSSES); do cp build/ovl$$n.bin release/SFBOSS$$n.BIN; done
+	cp docs/starfall.pdf release/starfall.pdf
+	cp build/starfall.lst build/release.lst
+	$(MAKE) --no-print-directory -B build/starfall.bin overlays
+
 clean:
 	rm -rf build
 
-.PHONY: all clean check docs docs-img overlays run run-game run-gamek sdrun FORCE
+.PHONY: all clean check docs docs-img overlays release run run-game run-gamek sdrun FORCE
 .PRECIOUS: build/%.s build/%.p build/%_spr.inc build/%_equ.inc build/%.bin

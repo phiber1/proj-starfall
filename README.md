@@ -12,6 +12,9 @@ high score kept on the SD card.  Built on
 
 ## Playing
 
+`release/` has the game ready to copy to the card (a release build), with
+the one-pager `starfall.pdf`.
+
 Copy `STARFALL.BIN` and `SFBOSS1.BIN` .. `SFBOSS4.BIN` to the SD card and
 type `RUNM"STARFALL"`.  The game keeps its high score in
 `STARFALL.HI` on the card.  Arrows (W A S Z) move, SPACE fires; a
@@ -25,6 +28,7 @@ PI-KEY10's joystick 1 works as it is.
     make run        # in the emulator (VMC10=path to vmc10-linux, default ~/vmc10-linux)
     make check      # headless checks
     make DEBUG=0    # release build
+    make release    # release/: the release build of the game and overlays, + the PDF
 
 Needs `asl` (the Macroassembler AS), a C compiler, cpp and Python 3.
 `docs/starfall.pdf` is a one-pager on the game (`make docs` renders it
