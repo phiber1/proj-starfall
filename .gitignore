@@ -1,0 +1,4 @@
+build/
+# placeholders the Claude Code sandbox mounts over protected paths
+.claude/
+.mcp.json

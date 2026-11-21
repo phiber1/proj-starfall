@@ -1,0 +1,36 @@
+# Boss 3 (re-imagined with the owner): a cephalopod, a bulbous head with
+# one great orange eye, the core in its mouth (columns 10-13, rows 10-13),
+# tentacles trailing to orange tips (the cannons: the outer ones,
+# columns 5 and 18, clear of the spots under the core).
+sprite boss3 artifact halo 1 1
+......WWWWWWWWWWWW......
+....WWBBBBBBBBBBBBWW....
+...WBBBBBBBBBBBBBBBBW...
+..WBBBBWWWWWWWWWWBBBBW..
+..WBBBWOOOOOOOOOOWBBBW..
+.WBBBWOOO......OOOWBBBW.
+.WBBBWOOO......OOOWBBBW.
+.WBBBBWOOOOOOOOOOWBBBBW.
+..WBBBBWWWWWWWWWWBBBBW..
+...WBBBBBBBBBBBBBBBBW...
+....WBBBBW....WBBBBW....
+...W.WBBW......WBBW.W...
+..W..W.W........W.W..W..
+.W..W..W........W..W..W.
+.W..W...W......W...W..W.
+..O..O...O....O...O..O..
+end
+
+
+# Boss 3's envoys (draft): floating eyeballs trailing tendrils, the
+# occupant's minions, 8x8 like every envoy
+sprite envoy3 artifact halo 1 1
+..WWWW..
+.WOOOOW.
+WOOWWOOW
+WOW..WOW
+WOOWWOOW
+.WOOOOW.
+..WWWW..
+.B.BB.B.
+end

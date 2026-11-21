@@ -1,0 +1,40 @@
+# Boss 4, the finale (first draft by Claude, for the owner to rework): a
+# flying fortress, 34x18 art (36x20 with the halo).  A crenellated
+# battlement with a central spire and two outer antennae; three hanging
+# pods, each with a core opening (columns 6-9, 15-18, 24-27, rows 13-16)
+# and its channel; four cannons underneath (columns 2, 12, 21, 31).  It
+# descends and then never moves across, so it is compiled for one shift
+# only (shift 2: its x, (128-36)/2 = 46, is on it).
+sprite boss4 artifact halo 1 1 shift 2
+................WW................
+................OO................
+...............WWWW...............
+.O.............WOOW.............O.
+..W............WBBW............W..
+..W...........WOOOOW...........W..
+...W.........WOBBBBOW.........W...
+...W.W.W.W..WOOOOOOOOW..W.W.W.W...
+...WWWWWWWWWWOOOOOOOOWWWWWWWWWW...
+..WOOOOOOOOOOOBBOOBBOOOOOOOOOOOW..
+.WOOBBOBBOBBOOBBOOBBOOBBOBBOBBOOW.
+WOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOW
+.WWWWOOOOOOWWWOOOOOOWWWOOOOOOWWWW.
+..B.WO....OWBWO....OWBWO....OW.B..
+..B.WO....OWBWO....OWBWO....OW.B..
+..O.WB....BWOWB....BWOWB....BW.O..
+....WB....BW.WB....BW.WB....BW....
+.....W....W...W....W...W....W.....
+end
+
+# Boss 4's envoys (draft): spiked mine drones with a dark eye.  They
+# patrol beside the fortress (all four shifts)
+sprite envoy4 artifact halo 1 1
+..W..W..
+.WOWWOW.
+WOOBBOOW
+.OB..BO.
+WOOBBOOW
+.WOWWOW.
+..W..W..
+........
+end

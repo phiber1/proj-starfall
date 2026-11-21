@@ -1,0 +1,37 @@
+# Boss 1: a stag beetle seen from above, facing down at the ship (owner:
+# "more bug"): split wing cases, the thorax, a head with orange eyes,
+# legs bristling out, and pincer mandibles curving down around the core's
+# opening (columns 10-13, rows 10-13) and its channel; the cannons fire
+# from the pincers' outer bases (columns 3 and 20: the
+# tips were too close to the core's channel).  24x16, a 1-pixel halo.
+sprite boss1 artifact halo 1 1
+.......WWWWWWWWWW.......
+.....WWBBBB..BBBBWW.....
+W...WBBWBBB..BBBWBBW...W
+.W.WBBWBBBB..BBBBWBBW.W.
+..WWBBBBBBB..BBBBBBBWW..
+...WBBBBBBB..BBBBBBBW...
+W..WBBBBBBB..BBBBBBBW..W
+.WWWBBBBBBW..WBBBBBBWWW.
+....WWWWWWWWWWWWWWWW....
+W..WOOBBBBBBBBBBBBOOW..W
+.WWOOBBBBW....WBBBBOOWW.
+...WBBBBBW....WBBBBBW...
+..WBBBW..........WBBBW..
+...WBBW..........WBBW...
+....WBBW.W....W.WBBW....
+.....WBOW......WOBW.....
+end
+
+# Boss envoy, 8x8: flies beside the boss (moving with it) and bombs.
+sprite envoy artifact halo 1 1
+..WWWW..
+.WBBBBW.
+WBBWWBBW
+WBWOOWBW
+WBBWWBBW
+.WBBBBW.
+..O..O..
+.O....O.
+end
+

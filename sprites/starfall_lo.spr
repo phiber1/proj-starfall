@@ -1,0 +1,97 @@
+# Game sprites in the low segment ($0400-$1FFF): the aliens and the
+# explosion frames.  See game.spr for the colour key and halos.
+
+# Alien type 1: saucer (orange, white dome, blue legs)
+sprite saucer artifact halo 1 2
+..WWWW..
+.WOWWOW.
+OOOOOOOO
+O.OOOO.O
+OOOOOOOO
+.BB..BB.
+.B.BB.B.
+B..BB..B
+B......B
+.B....B.
+end
+
+# Alien type 2: dart (blue and white)
+sprite dart artifact halo 1 2
+...WW...
+..WBBW..
+..WBBW..
+.WBBBBW.
+WBB..BBW
+WB.BB.BW
+W..BB..W
+...BB...
+..B..B..
+.B....B.
+end
+
+# Alien type 3: orbiter (orange and white, blue eyes)
+sprite orbiter artifact halo 1 2
+..OOOO..
+.OWWWWO.
+OOWOOWOO
+OOOOOOOO
+.OBOOBO.
+..OOOO..
+.O.OO.O.
+O..OO..O
+.O....O.
+O......O
+end
+
+# Explosion: four frames in the aliens' 8x10 box (flash, burst, ring, debris)
+sprite boom1 artifact halo 1 2 shift 0
+........
+........
+...WW...
+..WOOW..
+..OWWO..
+..WOOW..
+...WW...
+........
+........
+........
+end
+
+sprite boom2 artifact halo 1 2 shift 0
+........
+.O..W..O
+..OWWO..
+.WOOOOW.
+OWO..OWO
+.WOOOOW.
+..OWWO..
+.O..W..O
+........
+........
+end
+
+sprite boom3 artifact halo 1 2 shift 0
+O..W...O
+..O..O..
+.W....W.
+W......W
+........
+W......W
+.W....W.
+..O..O..
+O...W..O
+........
+end
+
+sprite boom4 artifact halo 1 2 shift 0
+........
+.B....O.
+........
+O......B
+........
+........
+B......O
+........
+.O....B.
+........
+end

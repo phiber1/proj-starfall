@@ -1,0 +1,112 @@
+# Game sprites (bench/game.asm), artifact colour: . black, O orange,
+# B blue, W white.  An artifact pixel is twice as wide as it is tall, so
+# these are drawn 8 wide for a 16-pixel look.  Halos are "across down":
+# horizontal speeds are half the vertical ones (FL_HALFX), so a 1-pixel
+# halo across covers 2 screen pixels.
+
+# The player's ship: 1 pixel a frame across (2 screen pixels), 2 down
+sprite ship artifact halo 1 2
+...WW...
+...WW...
+..WBBW..
+..WBBW..
+.WWBBWW.
+.WWWWWW.
+B.WWWW.B
+BWWWWWWB
+WWWOOWWW
+WW.OO.WW
+W..OO..W
+...OO...
+end
+
+# The ship's shot: a white column, 4 rows a frame (no horizontal halo:
+# it only moves up)
+sprite shot artifact halo 0 4
+W
+W
+W
+W
+W
+W
+end
+
+# Alien bomb: 3 rows a frame down, up to 1 pixel across (thrown along
+# a dive: it keeps the alien's sideways speed)
+sprite bomb artifact halo 1 3
+O
+O
+W
+O
+O
+end
+
+# The ship at warp speed, with its afterburner: two flame lengths that
+# alternate (same height, so each one's halo covers the other's flame and
+# switching needs no erase).  Flies straight up at up to 4 rows a frame: halo 0 across, 4 down.
+sprite shipw1 artifact halo 1 6 shift 3
+...WW...
+...WW...
+..WBBW..
+..WBBW..
+.WWBBWW.
+.WWWWWW.
+B.WWWW.B
+BWWWWWWB
+WWWOOWWW
+WW.OO.WW
+W..OO..W
+...OO...
+...WW...
+..OWWO..
+...OO...
+....O...
+........
+........
+end
+
+sprite shipw2 artifact halo 1 6 shift 3
+...WW...
+...WW...
+..WBBW..
+..WBBW..
+.WWBBWW.
+.WWWWWW.
+B.WWWW.B
+BWWWWWWB
+WWWOOWWW
+WW.OO.WW
+W..OO..W
+...OO...
+..OWWO..
+..OOOO..
+...OO...
+...O....
+...O....
+...O....
+end
+
+# The boss's core (its weak spot), 4x4, and its flash when hit.  Drawn
+# over the boss's opening; moves with the boss.
+sprite core artifact halo 1 1
+.WW.
+WOBW
+WBOW
+.WW.
+end
+
+sprite corehit artifact halo 1 1
+WWWW
+WWWW
+WWWW
+WWWW
+end
+
+# The core behind its closed hatch, while envoys protect it (same box as
+# core, so switching needs no erase)
+sprite coreshut artifact halo 1 1
+BBBB
+BWWB
+BWWB
+BBBB
+end
