@@ -1,8 +1,8 @@
 # StarFall: design notes
 
 StarFall is a vertical space shooter for the TRS-80 MC-10 with the 8K
-internal RAM mod and an MCX32-SD, in NTSC artifact colour (128x192, four
-colours).  It was developed inside mc10-game-engine (github
+internal RAM mod and an MCX32-SD, in NTSC artifact color (128x192, four
+colors).  It was developed inside mc10-game-engine (github
 phiber1/mc10-game-engine) and split out on 2026-11-20 at engine commit
 709f5ff; that repository's history holds every commit up to then.  The
 engine is the `engine/` git submodule here.  For the engine itself (the
@@ -14,9 +14,9 @@ Below: the game's design history, as it was written during development
 
 ### Game prototype (`src/starfall.asm`)
 
-* Title screen (working title STARFALL) with a colour sample: C runs
+* Title screen (working title STARFALL) with a color sample: C runs
   `col_swap` (engine/colswap.asm: decodes each sprite's halo routines and
-  swaps the bit pairs of every data byte) and swaps the text colour masks.
+  swaps the bit pairs of every data byte) and swaps the text color masks.
 * "PLAYER 1" banner at the start and after each lost ship; status line
   (SCORE in BCD via DAA, SHIPS) redrawn every 12 frames because sprites and
   stars cross it.
@@ -55,7 +55,7 @@ Below: the game's design history, as it was written during development
   after the map screen (modes WARP -> COAST -> map -> ARRIVE); waves only
   launch during play; stars no longer start in a diagonal (st_rnd steps
   its LFSR 8 bits per byte: single steps made consecutive bytes shifted
-  copies); the colour question appears only before the first game.
+  copies); the color question appears only before the first game.
 * **Bug (owner report): stars rushing, ship stuck and flickering, aliens
   slow.**  Two causes: (1) the game's direct-page variables had grown
   into the engine's hit_test scratch at $F8, so every collision test
@@ -283,9 +283,9 @@ Below: the game's design history, as it was written during development
   6 hits each, centre 14.  make check 4d.  Memory is now full: main ends
   $ADA8 (87 bytes free), low $1FED (18 free); the area wave lists moved
   to the low segment to make room.  Next: free memory (see the options
-  discussed with the owner) before the title and colour screens.
-* **Colour check screen (owner's request, 2026-11-18).**  Its own screen,
-  once, right after loading (colour_check, falling through from start):
+  discussed with the owner) before the title and color screens.
+* **Color check screen (owner's request, 2026-11-18).**  Its own screen,
+  once, right after loading (color_check, falling through from start):
   an orange block, "C" swaps orange and blue, SPACE (let go first) goes
   on to the title, which no longer shows the sample and stays the same;
   game over returns to the title only.  col_ok is gone.  make check 1a;
@@ -297,7 +297,7 @@ Below: the game's design history, as it was written during development
   src/ovl.inc) into build/ovlN.bin, copied to the SD card as
   SFBOSSN.BIN (make run-game and make check do it).  Header: fdb hull_dsc,
   envoy_dsc, 0 (boss_start reads it; it's also the col_swap list, applied
-  after a load if the colours were swapped).  map_show calls ovl_need:
+  after a load if the colors were swapped).  map_show calls ovl_need:
   if the area's overlay (boss_tab BT_OVL) isn't the one in memory
   (ovl_cur), LOADM "BOSSn" through the MCX32-SD BIOS (JSR $2000, fn 22,
   mode 2; hw.inc names the parameter block), interrupts on so the frame
@@ -368,8 +368,8 @@ Below: the game's design history, as it was written during development
   banner (round_banner).  check 4h.
 * **Title screen (draft, 2026-11-18).**  The name big (big_str /
   big_char: the 3x5 font magnified, each pixel 3 artifact pixels by 6
-  rows, a letter 3 bytes by 30 rows, in colour bands bg_band through
-  bg_cols = white/col_o/col_b, so it follows the colour swap), "MEET
+  rows, a letter 3 bytes by 30 rows, in color bands bg_band through
+  bg_cols = white/col_o/col_b, so it follows the color swap), "MEET
   THE ALIENS" with the three aliens' real sprites and names (Claude's
   names, the owner's choice: SWOOPER the saucer (was LOOPER), ZAGGER the dart, WARPER
   the orbiter; the cast table), the start prompt, the controls and the
@@ -406,10 +406,10 @@ Below: the game's design history, as it was written during development
     halo is 3 rows).  Round 1 as designed.  Checks 4i and 5c (hardest
     settings 3.4% over budget in normal play, limit 5% like the boss
     fights; if it feels slow, bomb_gap min 4).  Even rounds swap the
-    aliens' orange and blue (owner: the old arcade trick): al_colours
+    aliens' orange and blue (owner: the old arcade trick): al_colors
     runs col_swap on al_sprites (saucer, dart, orbiter) when the round's
     parity differs from al_flip; the title resets it, so the cast shows
-    its own colours; a colour-check swap on top still combines right.
+    its own colors; a color-check swap on top still combines right.
   * **Done (2026-11-20): file names.**  On the card the game is
     STARFALL.BIN (LOADM"STARFALL"), its bosses SFBOSS1-4.BIN, its high
     score STARFALL.HI.  The source stays src/starfall.asm (make run-game);

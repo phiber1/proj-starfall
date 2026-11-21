@@ -1,6 +1,6 @@
 # StarFall
 
-A vertical space shooter for the TRS-80 MC-10, in NTSC artifact colour.
+A vertical space shooter for the TRS-80 MC-10, in NTSC artifact color.
 Four areas of alien waves, each ending in a boss, the last of them the
 space fortress; extra ships, sortie bonuses, rounds that get harder, and a
 high score kept on the SD card.  Built on
@@ -29,7 +29,7 @@ PI-KEY10's joystick 1 works as it is.
 Needs `asl` (the Macroassembler AS), a C compiler, cpp and Python 3.
 `docs/starfall.pdf` is a one-pager on the game (`make docs` renders it
 from `docs/onepager.html` with headless Chromium; `make docs-img` retakes
-its screenshots).  Also: `make run-sfx` (the sound board), `make run-logos` (logo colour
+its screenshots).  Also: `make run-sfx` (the sound board), `make run-logos` (logo color
 schemes), `make run-view VIEW=sprites/NAME.spr` (a sprite file's sprites).
 See `NOTES.md` for the design history.
 

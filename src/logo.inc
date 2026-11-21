@@ -1,12 +1,12 @@
 ; logo.inc: the title logo's letters and their drawing (src/starfall.asm),
-; shared with the logo colour comparison (src/logos.asm).  The program
+; shared with the logo color comparison (src/logos.asm).  The program
 ; provides the variables (bg_scr, bg_g, bg_b (3), bg_n, bg_k, bg_row,
 ; bg_cols (3: white, orange, blue masks), bg_m, bg_bandp (the band table
 ; to use: 30 rows of 0 white, 1 orange, 2 blue) and bu_s); the logo's
 ; font tables come with it.
 
 ; big_str: X = screen, D = string: the logo's letters (logo_font: 9
-; pixels and a 3-pixel gap, 3 bytes, by 30 rows) in colour bands
+; pixels and a 3-pixel gap, 3 bytes, by 30 rows) in color bands
 ; (bg_bandp's table, through bg_cols)
 big_str:
                 std     bu_s
@@ -71,7 +71,7 @@ big_char_row:   ldx     bg_g            ; a row: pixels in bits 15-7 -> 3
 big_char_f2:    stab    bg_b+2
                 ldaa    #2              ; each row twice
                 staa    bg_k
-big_char_b2:    ldx     bg_bandp        ; this row's colour mask
+big_char_b2:    ldx     bg_bandp        ; this row's color mask
                 ldab    bg_row
                 abx
                 ldab    0,x

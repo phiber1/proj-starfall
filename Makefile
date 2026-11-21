@@ -7,7 +7,7 @@
 #                        run-gamek: with the CPU meter)
 #   make check           headless checks (needs the VMC10 for Linux emulator)
 #   make run-sfx         the sound board: every game sound, up/down, SPACE
-#   make run-logos       the title logo in several colour schemes
+#   make run-logos       the title logo in several color schemes
 #   make run-view        a still display of a sprite file's sprites
 #                        (VIEW=sprites/NAME.spr, default sprites/starfall.spr)
 #   make DEBUG=0         release build: no debug-port writes, no LOAD timing

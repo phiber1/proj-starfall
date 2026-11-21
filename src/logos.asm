@@ -1,4 +1,4 @@
-; logos.asm: the title logo in several colour schemes, one above another,
+; logos.asm: the title logo in several color schemes, one above another,
 ; for comparing them (the same drawing code as the game: logo.inc).
 ;
 ;   make run-logos

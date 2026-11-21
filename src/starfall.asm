@@ -1,9 +1,9 @@
 ; starfall.asm: StarFall, a vertical space shooter for the MC-10 (8K mod +
 ; MCX32-SD), built on mc10-game-engine (the engine/ submodule).
 ;
-; An original vertical space shooter in artifact colour.  The title screen
-; shows a colour sample (C swaps orange and blue, for real NTSC machines
-; that power up in the other colour phase); SPACE starts.  "PLAYER 1" is
+; An original vertical space shooter in artifact color.  The title screen
+; shows a color sample (C swaps orange and blue, for real NTSC machines
+; that power up in the other color phase); SPACE starts.  "PLAYER 1" is
 ; shown at the start and after each lost ship.  Waves of aliens fly
 ; scripted paths, dive through the bottom and back in at the top, and
 ; drop bombs; shots make them explode.  Bombs or collisions destroy the
@@ -13,7 +13,7 @@
 
 #define OBJ_EXTRA 10                    /* flight (7) + animation (3) */
 #define AN_BASE 7                       /* animation bytes after flight's */
-#define FL_HALFX 1                      /* artifact colour: 128 pixels across */
+#define FL_HALFX 1                      /* artifact color: 128 pixels across */
 #define STAR_TOP 7                      /* stars stay below the status bar */
 #include "layout.inc"
 #include "ovl.inc"
@@ -157,14 +157,14 @@ bg_g            rmb     2               ; ... glyph row,
 bg_b            rmb     3               ; ... a glyph row magnified,
 bg_n            rmb     1               ; ... rows left,
 bg_k            rmb     1
-bg_row          rmb     1               ; ... the logo row (its colour band)
+bg_row          rmb     1               ; ... the logo row (its color band)
 bg_cols         rmb     3               ; white, orange, blue masks
 bg_m            rmb     1               ; ... the row's mask
 bg_bandp        rmb     2               ; ... the band table drawn with
 fin_t           rmb     2               ; the finale's countdown
 round           rmb     1               ; 1, 2 ... (each fortress begins another)
 dlev            rmb     1               ; difficulty: round - 1, at most DIFF_MAX
-al_flip         rmb     1               ; 1: the aliens' colours are swapped
+al_flip         rmb     1               ; 1: the aliens' colors are swapped
 dgap            rmb     1               ; ... dlev x 2 (launch gaps, core hits)
 spray_on        rmb     1               ; ... frames of each bomb cycle that spray
 bomb_gap        rmb     1               ; ... frames between bombs at least
@@ -265,15 +265,15 @@ start_b2:       clr     0,x
                 jsr     frame_init
 
 ; ---------------------------------------------------------------- title
-; The colour check, once after loading: a block that should look orange
+; The color check, once after loading: a block that should look orange
 ; (C swaps orange and blue if it doesn't); SPACE goes on to the title.
                 jsr     hi_load         ; the high score from the SD card
-colour_check:
+color_check:
                 jsr     col_draw
 cc2_loop:       jsr     frame_wait
                 jsr     snd_frame
                 jsr     kbd_read
-                jsr     key_c           ; C: swap the colours
+                jsr     key_c           ; C: swap the colors
                 cmpa    keyprev
                 beq     cc2_fire
                 staa    keyprev
@@ -302,8 +302,8 @@ title:
                 beq     title_f1
                 clr     hi_new
                 jsr     hi_save
-title_f1:       clra                    ; the cast in its own colours
-                jsr     al_colours
+title_f1:       clra                    ; the cast in its own colors
+                jsr     al_colors
                 jsr     title_draw
                 tst     title_seen      ; the very first title: it bursts on
                 bne     title_f2        ; with the boss explosion's roar
@@ -2157,7 +2157,7 @@ set_diff:
                 ldaa    round           ; even rounds: the aliens' orange and
                 anda    #1              ; blue swapped (the old arcade trick)
                 eora    #1
-                bsr     al_colours
+                bsr     al_colors
                 ldaa    round
                 deca
                 cmpa    #DIFF_MAX
@@ -2193,13 +2193,13 @@ set_diff_f2:    staa    bomb_gap
                 staa    env_fire
                 rts
 
-al_colours:                             ; A = 1: aliens swapped, 0: as drawn
-                cmpa    al_flip         ; (col_swap swaps them; a colour
-                beq     al_colours_r    ; check swap on top still works)
+al_colors:                              ; A = 1: aliens swapped, 0: as drawn
+                cmpa    al_flip         ; (col_swap swaps them; a color
+                beq     al_colors_r     ; check swap on top still works)
                 staa    al_flip
                 ldx     #al_sprites
                 jmp     col_swap
-al_colours_r:   rts
+al_colors_r:    rts
 
 round_banner:                           ; "ROUND n" (the current round)
                 ldaa    round
@@ -3031,7 +3031,7 @@ ovl_need_b1:    clr     0,x             ; (load offset 0, no callback)
                 ldaa    frame_count
                 suba    ld_t
                 staa    ld_t
-                ldaa    col_o           ; colours swapped?  The new sprites
+                ldaa    col_o           ; colors swapped?  The new sprites
                 cmpa    #TXT_ORANGE     ; too
                 beq     ovl_need_f2
                 ldx     #OVL_BASE
@@ -3054,7 +3054,7 @@ ovl_name:       fcc     "SFBOSS1"       ; (the digit is set as it loads)
 ; ---------------------------------------------------------------- title
 title_draw:
                 jsr     cls
-                ldaa    #TXT_WHITE      ; the logo's colours (after any swap)
+                ldaa    #TXT_WHITE      ; the logo's colors (after any swap)
                 ldab    col_o
                 std     bg_cols
                 ldaa    col_b
@@ -3131,13 +3131,13 @@ cast:           fdb     saucer_hr
 
 #include "logo.inc"            ; big_str: the logo
 
-; the logo's colour bands, a row each (0 white, 1 orange, 2 blue): blue
+; the logo's color bands, a row each (0 white, 1 orange, 2 blue): blue
 ; at the top brightening through dithered scanlines into white, as if lit
 ; from below (the owner's choice, B in bench/logos.asm)
 bg_band:        fcb     2, 2, 2, 2, 2, 2, 2, 2, 2, 2
                 fcb     2, 0, 2, 2, 0, 2, 0, 2, 0, 0
                 fcb     2, 0, 0, 0, 0, 0, 0, 0, 0, 0
-col_draw:                               ; the colour check screen
+col_draw:                               ; the color check screen
                 jsr     cls
                 ldx     #TXT_AT(70,14)  ; a block that should look orange
                 ldab    #12
@@ -3597,7 +3597,7 @@ s_load:         fcc     "LOAD "
 s_keys:         fcc     "ARROWS/WASZ MOVE  SPACE FIRES"
                 fcb     0
 
-; Every artifact sprite, for the colour swap
+; Every artifact sprite, for the color swap
 al_sprites:     fdb     saucer_dsc, dart_dsc, orbiter_dsc, 0
 all_sprites:    fdb     ship_dsc, saucer_dsc, dart_dsc, orbiter_dsc, shot_dsc
                 fdb     bomb_dsc, boom1_dsc, boom2_dsc, boom3_dsc, boom4_dsc

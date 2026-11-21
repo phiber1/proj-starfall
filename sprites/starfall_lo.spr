@@ -1,5 +1,5 @@
 # Game sprites in the low segment ($0400-$1FFF): the aliens and the
-# explosion frames.  See game.spr for the colour key and halos.
+# explosion frames.  See game.spr for the color key and halos.
 
 # Alien type 1: saucer (orange, white dome, blue legs)
 sprite saucer artifact halo 1 2

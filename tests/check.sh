@@ -19,7 +19,7 @@ check() {   # name, condition (shell test)
 }
 sym() { printf '%04X' 0x$(awk '/Symbol Table/{p=1} p' $LST | tr '|' '\n' | awk -v n=$1 '$1==n{print $3}'); }
 # load the game the way a player does: LOADM from the SD card, then EXEC
-# (past the colour check with SPACE, so a test's own SPACE starts a game from the title)
+# (past the color check with SPACE, so a test's own SPACE starts a game from the title)
 run() { $H $R/MC10.BIN mcx32sd:$R/mcx32sd_flash.bin 8k sd:$SD frames:200 'type:LOADM"STARFALL"\nEXEC\n' frames:120 'type: ' frames:30 "$@"; }
 memval() { grep "^mem $1" | sed -n "${2:-1}p" | awk '{print strtonum("0x"$3)}'; }
 # fixed random seeds, poked as a game starts (see the budget checks)
@@ -35,7 +35,7 @@ x0=$(echo "$out" | memval $SHIP 1); x1=$(echo "$out" | memval $SHIP 2)
 check "ship moves left when A is held (x $x0 -> $x1)" "[ $x1 -lt $x0 ]"
 check "play mode with normal stars" "[ $(echo "$out" | memval $MODE) -eq 0 ] && [ $(echo "$out" | memval $WARPF) -eq 1 ]"
 
-# 1a. The colour check comes once, right after loading: an orange block
+# 1a. The color check comes once, right after loading: an orange block
 #     (C swaps it to blue), then SPACE leads to the title, without it.
 BLK=48CE    # TXT_AT(70,14): the block's first byte
 raw() { $H $R/MC10.BIN mcx32sd:$R/mcx32sd_flash.bin 8k sd:$SD frames:200 'type:LOADM"STARFALL"\nEXEC\n' frames:120 "$@"; }
@@ -43,7 +43,7 @@ out=$(raw mem:$BLK,4 type:C frames:90 mem:$BLK,4 'type: ' frames:60 mem:$BLK,4 m
 b0=$(echo "$out" | grep "^mem $BLK" | sed -n 1p | cut -d: -f2 | tr -d ' ')
 b1=$(echo "$out" | grep "^mem $BLK" | sed -n 2p | cut -d: -f2 | tr -d ' ')
 b2=$(echo "$out" | grep "^mem $BLK" | sed -n 3p | cut -d: -f2 | tr -d ' ')
-check "colour check after loading: orange block ($b0), C swaps it ($b1), SPACE goes to the title ($b2)" "[ $b0 = AAAAAAAA ] && [ $b1 = 55555555 ] && [ $b2 = 00000000 ]"
+check "color check after loading: orange block ($b0), C swaps it ($b1), SPACE goes to the title ($b2)" "[ $b0 = AAAAAAAA ] && [ $b1 = 55555555 ] && [ $b2 = 00000000 ]"
 
 # 1e. The very first title bursts on with the boss explosion's roar; the
 #     title after a game over doesn't.
@@ -262,7 +262,7 @@ am=$(echo "$out" | memval $(sym alive_max) 1)
 check "the unguarded fortress sends three escorts at once ($am)" "[ $am -eq 3 ]"
 check "side cores destroyed: the centre opens (states $cs2), and destroying it ends the boss (state $bs4)" "[ $cs2 = 020201 ] && { [ $bs4 -ge 3 ] || [ $bs4 -eq 0 ]; }"
 cols=$(echo "$out" | grep "^mem $(sym col_o)" | cut -d: -f2 | tr -d ' ')
-check "the fortress's fall leaves the variables alone (text colours $cols)" "[ $cols = AA55 ]"
+check "the fortress's fall leaves the variables alone (text colors $cols)" "[ $cols = AA55 ]"
 
 # 4f. In a long boss fight the escort waves count on, but a lost ship's
 #     map shows it at the area's checkpoint, not climbing past it: with
@@ -301,7 +301,7 @@ check "a game begins with a banner: $rt" "[ $bp = $(sym s_round) ] && [ \"$rt\" 
 #     of 128 frames, 9 between bombs, cannons every 22, envoys every 16,
 #     bombs 2 rows a frame); the finale's new round 2 takes a step (51, 8,
 #     19, 14); from round 5 on, the hardest (96, 5, 10, 8, 3 rows).  Even rounds swap the
-#     aliens' colours.
+#     aliens' colors.
 DV=$(sym spray_on)    # spray_on, bomb_gap, boss_fire, env_fire follow it
 dvals() { echo "$1" | grep "^mem $DV" | sed -n "${2}p" | cut -d: -f2 | awk '{printf "%d %d %d %d", strtonum("0x"$1), strtonum("0x"$2), strtonum("0x"$3), strtonum("0x"$4)}'; }
 AF=$(sym al_flip)
@@ -310,7 +310,7 @@ d1=$(dvals "$out" 1); d2=$(dvals "$out" 2); f1=$(echo "$out" | memval $AF 1); f2
 out=$(run frames:30 'type: ' frames:200 poke:$(sym round),05 poke:$AREA,03 "poke:$ALIENS,$z" poke:$AREA_DONE,01 poke:$ALIVE,00 poke:$BS,04 frames:900 mem:$DV,4 mem:$(sym round),1 mem:$AF,1)
 d6=$(dvals "$out" 1); f6=$(echo "$out" | memval $AF 1)
 check "rounds get harder: round 1 ($d1), round 2 ($d2), round 6 ($d6)" "[ \"$d1\" = '36 9 22 16' ] && [ \"$d2\" = '51 8 19 14' ] && [ \"$d6\" = '96 5 10 8' ]"
-check "even rounds swap the aliens' colours (rounds 1, 2, 6: $f1 $f2 $f6)" "[ $f1 -eq 0 ] && [ $f2 -eq 1 ] && [ $f6 -eq 1 ]"
+check "even rounds swap the aliens' colors (rounds 1, 2, 6: $f1 $f2 $f6)" "[ $f1 -eq 0 ] && [ $f2 -eq 1 ] && [ $f6 -eq 1 ]"
 
 # 4j. Extra ships at 10,000 and every 25,000 (a big jump passes several);
 #     aliens are worth 10 x the round (round 3: 30 each).

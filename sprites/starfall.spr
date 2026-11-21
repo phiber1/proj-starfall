@@ -1,4 +1,4 @@
-# Game sprites (bench/game.asm), artifact colour: . black, O orange,
+# Game sprites (bench/game.asm), artifact color: . black, O orange,
 # B blue, W white.  An artifact pixel is twice as wide as it is tall, so
 # these are drawn 8 wide for a 16-pixel look.  Halos are "across down":
 # horizontal speeds are half the vertical ones (FL_HALFX), so a 1-pixel
