@@ -99,7 +99,7 @@ big_char_b2:    ldx     bg_bandp        ; this row's color mask
                 beq     big_char_r
                 jmp     big_char_row
 big_char_r:     rts
-; the logo's own letters (owner: straight diagonals for the curves): 9
+; the logo's own letters (straight diagonals for the curves): 9
 ; pixels by 15 rows, each row drawn twice (one pixel per two rows: 45
 ; degrees, artifact pixels being twice as wide as tall); per letter its
 ; code, then a word a row, pixels in bits 15-7 (1 = lit)

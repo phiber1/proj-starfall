@@ -129,8 +129,8 @@ check "wrapping aliens cross from one side to the other ($1 crossings)" "[ $1 -g
 check "none stays straddling the edge (longest: $2 frames)" "[ $2 -le 30 ]"
 
 # 2e. Circling aliens (area 1's orbiter wave, forced) come back in from
-#     the top at a new random x after each dive (owner: they used to dive
-#     in the same columns, so a player could wait them out), stay on
+#     the top at a new random x after each dive (the same columns every
+#     time would let a player wait them out), stay on
 #     screen, and wait out of sight first (an instant jump looked like a
 #     glitch) until the whole column has left the screen.  (An alien that
 #     explodes, say against the ship, counts as gone: its slot is reused.)

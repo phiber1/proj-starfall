@@ -1,10 +1,9 @@
-# Boss 4, the finale (first draft by Claude, for the owner to rework): a
-# flying fortress, 34x18 art (36x20 with the halo).  A crenellated
-# battlement with a central spire and two outer antennae; three hanging
-# pods, each with a core opening (columns 6-9, 15-18, 24-27, rows 13-16)
-# and its channel; four cannons underneath (columns 2, 12, 21, 31).  It
-# descends and then never moves across, so it is compiled for one shift
-# only (shift 2: its x, (128-36)/2 = 46, is on it).
+# Boss 4, the finale: a flying fortress, 34x18 art (36x20 with the
+# halo).  A crenellated battlement with a central spire and two outer
+# antennae; three hanging pods, each with a core opening (columns 6-9,
+# 15-18, 24-27, rows 13-16) and its channel; four cannons underneath
+# (columns 2, 12, 21, 31).  It descends and then never moves across, so
+# it is compiled for one shift only (shift 2: its x, (128-36)/2 = 46, is on it).
 sprite boss4 artifact halo 1 1 shift 2
 ................WW................
 ................OO................

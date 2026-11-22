@@ -3133,7 +3133,7 @@ cast:           fdb     saucer_hr
 
 ; the logo's color bands, a row each (0 white, 1 orange, 2 blue): blue
 ; at the top brightening through dithered scanlines into white, as if lit
-; from below (the owner's choice, B in bench/logos.asm)
+; from below (scheme B in src/logos.asm)
 bg_band:        fcb     2, 2, 2, 2, 2, 2, 2, 2, 2, 2
                 fcb     2, 0, 2, 2, 0, 2, 0, 2, 0, 0
                 fcb     2, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -3475,7 +3475,7 @@ cans3:          fcb     2               ; (the outer tentacles' tips: clear of
 ; Bosses 1 and 3: their cannons must leave every spot under the core
 ; clear (the ship's gun under columns 10-13 puts its 8-pixel hull over
 ; columns 7-17): columns 6 or less, or 18 or more.  (Boss 2's sit closer,
-; and that's how the owner likes its fight.)
+; on purpose: a harder fight.)
 B1_CAN_L        equ     3               ; (the cannon columns: used below
 B1_CAN_R        equ     20              ; and checked here)
 B3_CAN_L        equ     5
